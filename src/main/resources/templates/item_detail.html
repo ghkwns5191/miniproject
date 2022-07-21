@@ -1,0 +1,21 @@
+<html layout:decorate="~{layout}">
+
+<link rel="stylesheet" type="text/css" th:href="@{/bootstrap.min.css}">
+
+<div class="container my-3">
+<h2 class="border-bottom py-2" th:text = "${item.subject}"> </h2>
+
+<div class="card my-3">
+<div class="card-body">
+<div class="card-text" style="white-space:pre-line;" th:text=${item.content}></div>
+</div>
+<div>
+<div class="d-flex justify-content-end">
+<div class="badge bg-light text-dar p-2 text-start">
+<td th:text="${#temporals.format(item.createDate, 'yyyy-mm-dd HH:mm')}"></td>
+</div>
+</div>
+</div>
+</div>
+
+</html>

@@ -1,21 +1,18 @@
-<!DOCTYPE html>
-<html>
- <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <link rel="stylesheet" type="text/css" th:href="@{/bootstrap.min.css}">
-  <title> </title>
- </head>
-<body>
-  <!-- 네비게이션바 -->
-  <nav th:replace="navbar::navbarFragment"></nav> 
-  <!-- 기본 템플릿 안에 삽입될 내용  -->
-   <th:block layout:fragment="content"></th:block>
-   <!--  Bootstrap js -->
-   <script th:src="@{/bootstrap.min.js}" ></script>
-  <!-- 자바스크립트 Start -->
-<th:block layout:fragment="script"></th:block>
-<!-- 자바스크립트 End -->
-<th:block th:replace="footer::footer"> </footer>
-</body>
+<html layout:decorate="~{layout}">
+
+
+
+<div layout:fragment="footer" class="container my-3">
+<footer>
+<div>
+	<div>상호 : 중고마켓(주)</div>
+	대표자 : 홍길동<br>
+	개인정보보호책임자 : 변우중 오동현 유화준<br>
+	주소 : 서울시 강남구<br>
+	전화번호 : 02-119-1133<br>
+	이메일 : u_market@gmail.com<br>
+</div>
+</footer>
+</div>
+
 </html>

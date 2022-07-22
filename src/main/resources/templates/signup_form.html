@@ -6,17 +6,17 @@
         </div>
     </div>
     <form th:action="@{/user/signup}" th:object="${userCreateForm}" method="post">
-        <div th:replace="form_errors :: formErrorsFragment"></div>
+       
         <div class="mb-3">
             <label for="username" class="form-label">사용자ID</label>
             <input type="text" th:field="*{username}" class="form-control">
         </div>
         <div class="mb-3">
-            <label for="password" class="form-label">비밀번호</label>
+            <label for="password1" class="form-label">비밀번호</label>
             <input type="password" th:field="*{password1}" class="form-control">
         </div>
         <div class="mb-3">
-            <label for="password" class="form-label">비밀번호 확인</label>
+            <label for="password2" class="form-label">비밀번호 확인</label>
             <input type="password" th:field="*{password2}" class="form-control">
         </div>
         <div class="mb-3">
@@ -24,7 +24,7 @@
             <input type="email" th:field="*{email}" class="form-control">
         </div>
         <div class="mb-3">
-            <label for="dateofbirth" class="form-label">전화번호</label>
+            <label for="phonenumber" class="form-label">전화번호</label>
             <input type="tel" th:field="*{phonenumber}" class="form-control">
         </div>
         

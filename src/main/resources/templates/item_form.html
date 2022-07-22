@@ -1,16 +1,21 @@
 <html layout:decorate="~{layout}">
 
 <div layout:fragment="content" class="container">
-<h5 class="my-3 border-bottom pb-2"> 질문 등록 </h5>
-<form th:action="@{/item/create}" th:object="${itemform}" method="post">
+<h5 class="my-3 border-bottom pb-2"> 제품 등록 </h5>
+<form th:action="@{/item/create}" th:object="${itemForm}" method="post">
 
 <div class="mb-3">
 <label for="subject" class="form-control"> 제목 </label>
 <input type="text" th:field="*{subject}" name="subject" class="form-control">
 </div>
 <div class="mb-3">
-<label for="content" class="form-label"> 내용 </label>
+<label for="content" class="form-label"> 상세정보 </label>
 <textarea type="content" th:field="*{content}" class="form-control" row="10"></textarea>
+</div>
+
+<div class="mb-3">
+<label for="price" class="form-control"> 가격 </label>
+<input type="text" th:field="*{price}" name="price" class="form-control">
 </div>
 
 <input type="submit" value="저장하기" class="btn btn-primary my-2">

@@ -20,17 +20,18 @@
                 <td class="text-start">
                     <a th:href="@{|/item/detail/${item.id}|}" th:text="${item.subject}"></a>
                     <span class="text-danger small ms-2"
-                        th:if="${#lists.size(item.answerList) > 0}" 
-                        th:text="${#lists.size(item.answerList)}">
+                        th:if="${#lists.size(item.inquiryList) > 0}" 
+                        th:text="${#lists.size(item.inquiryList)}">
                     </span>
                 </td>
-                <td><span th:if="${item.author != null}" th:text="${item.author.username}"></span></td> <!-- 글쓴이 -->
-                <td th:text="${#temporals.format(question.createDate, 'yyyy-MM-dd HH:mm')}"></td>
+                <td><span th:if="${item.author != null}" th:text="${item.author}"></span></td> <!-- 글쓴이 -->
+                <td th:text="${#temporals.format(item.createDate, 'yyyy-MM-dd HH:mm')}"></td>
             </tr>
         </tbody>
     </table>
-    <!--
-    <!-- 페이징처리 시작
+   
+    <!-- 페이징처리 시작 -->
+    
     <div th:if="${!paging.isEmpty()}">
         <ul class="pagination justify-content-center">
             <li class="page-item" th:classappend="${!paging.hasPrevious} ? 'disabled'">
@@ -54,9 +55,10 @@
                 </a>
             </li>
         </ul>
-    </div>  -->
-    <!--
-    <!-- 페이징처리 끝 
+    </div> 
+   
+    <!-- 페이징처리 끝 -->
+    <!-- 
     <form th:action="@{/question/list}" method="get" id="searchForm">
         <input type="hidden" id="kw" name="kw" th:value="${kw}">
         <input type="hidden" id="page" name="page" th:value="${paging.number}">
@@ -75,6 +77,6 @@
 	    document.getElementById('kw').value = document.getElementById('search_kw').value;
 	    document.getElementById('page').value = 0;  // 검색버튼을 클릭할 경우 0페이지부터 조회한다.
 	    document.getElementById('searchForm').submit();
-	});
-</script>  -->
+	}); 
+</script>   -->
 </html>

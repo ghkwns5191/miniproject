@@ -5,7 +5,7 @@ import java.security.Principal;
 import javax.validation.Valid;
 
 import org.springframework.data.domain.Page;
-import org.springframework.http.HttpStatus;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -14,10 +14,10 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.server.ResponseStatusException;
 
-import com.mysite.used_market.used_user.SiteUser;
-import com.mysite.used_market.used_user.UserService;
+import com.mysite.used_market.inquiry.InquiryForm;
+import com.mysite.used_market.user.SiteUser;
+import com.mysite.used_market.user.UserService;
 
 import lombok.RequiredArgsConstructor;
 
@@ -38,29 +38,29 @@ public class ItemController {
 	
 	// 제목 누르면 내용(상세페이지)로 넘기기
 	@RequestMapping("/detail/{id}")
-	public String detail(Model model, @PathVariable("id") Integer id) {
+	public String detail(Model model, @PathVariable("id") Integer id, InquiryForm inquiryForm) {
 		Item item = this.itemService.getItem(id);
 		model.addAttribute("item", item);
 		return "item_detail";
 	}
 	
-	/*
+	
     @RequestMapping("/list") // 페이지
-    public String list(Model model, @RequestParam(value="page", defaultValue = "0") int page,
+    public String list(Model model, @RequestParam(value="page", defaultValue = "0") Integer page,
     		           @RequestParam(value="kw", defaultValue="") String kw) {
-        Page<Item> paging = this.itemService.getList(page);
+        Page<Item> paging = this.itemService.getList(page, kw);
         model.addAttribute("paging", paging);
         model.addAttribute("kw", kw);
         return "item_list";
-    }*/
+    }
     
-    //@PreAuthorize("isAuthenticated()")
+    @PreAuthorize("isAuthenticated()")
     @GetMapping("/create")    
     public String itemCreate(ItemForm itemForm) {
     	return "item_form";
     }
     
-    //@PreAuthorize("isAuthenticated()")
+    @PreAuthorize("isAuthenticated()")
     @PostMapping("/create")
     public String itemCreate(@Valid ItemForm itemForm, BindingResult bindingResult,
     		                     Principal prinipal ) {
@@ -68,7 +68,7 @@ public class ItemController {
             return "item_form";
         }
         SiteUser siteUser = this.userService.getUser(prinipal.getName());
-        this.itemService.create(itemForm.getSubject(), itemForm.getContent(), siteUser);
+        this.itemService.create(itemForm.getSubject(), itemForm.getContent(), itemForm.getPrice(), siteUser);
         return "redirect:/item/list";
     }
     /*

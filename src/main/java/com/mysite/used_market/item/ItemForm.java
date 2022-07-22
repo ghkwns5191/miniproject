@@ -15,4 +15,7 @@ public class ItemForm {
 	
 	@NotEmpty(message="내용은 필수 입니다.")
 	private String content;
+	
+	@NotEmpty(message="가격은 필수 입니다.")
+	private String price;
 }

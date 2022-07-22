@@ -1,6 +1,5 @@
-package com.mysite.used_market.User;
+package com.mysite.used_market.user;
 
-import java.time.LocalDate;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;

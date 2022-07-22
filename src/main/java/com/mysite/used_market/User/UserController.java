@@ -1,4 +1,4 @@
-package com.mysite.used_market.User;
+package com.mysite.used_market.user;
 
 import javax.validation.Valid;
 
@@ -19,12 +19,12 @@ public class UserController {
 	private final UserService userService;
 	
 	@GetMapping("/signup")
-	public String singup(UserCreateForm userCreateForm) {
+	public String signup(UserCreateForm userCreateForm) {
 		return "signup_form";
 	}
 	
 	@PostMapping("/signup")
-	public String singup(@Valid UserCreateForm userCreateForm, BindingResult bindingResult) {
+	public String signup(@Valid UserCreateForm userCreateForm, BindingResult bindingResult) {
 		if(bindingResult.hasErrors()) {
 			return "signup_form";
 		} 
@@ -45,7 +45,7 @@ public class UserController {
 		  bindingResult.reject("signupFailed", e.getMessage());
 		  return "signup_form";
 	  }
-	  	  return "redirect:/";
+	  	  return "redirect:/item/list";
 	}
 	
 	@GetMapping("/login")

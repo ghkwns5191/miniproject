@@ -1,4 +1,4 @@
-package com.mysite.used_market.User;
+package com.mysite.used_market.user;
 
 import lombok.Getter;
 

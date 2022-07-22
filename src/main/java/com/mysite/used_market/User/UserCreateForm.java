@@ -1,4 +1,4 @@
-package com.mysite.used_market.User;
+package com.mysite.used_market.user;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;

@@ -13,7 +13,7 @@
   <!-- 기본 템플릿 안에 삽입될 내용  -->
    <th:block layout:fragment="content"></th:block>
    <!-- footer -->
-   <footer layout:fragment="footer"></footer>
+   <th:block th:replace="footer::footer"></th:block>
    <!--  Bootstrap js -->
    <script th:src="@{/bootstrap.min.js}" ></script>
   <!-- 자바스크립트 Start -->

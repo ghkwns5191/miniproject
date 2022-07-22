@@ -13,7 +13,7 @@ import javax.persistence.ManyToOne;
 import org.springframework.data.annotation.CreatedDate;
 
 import com.mysite.used_market.item.Item;
-import com.mysite.used_market.user.User;
+import com.mysite.used_market.user.SiteUser;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -27,11 +27,11 @@ public class Inquiry {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 
-	@ManyToOne
+	@ManyToOne	
 	private Item item;
 
 	@ManyToOne
-	private User username;
+	private SiteUser author;
 
 	@Column(columnDefinition = "TEXT")
 	private String content;
@@ -42,7 +42,6 @@ public class Inquiry {
 	private LocalDateTime modifyDate;
 	
 	
-	private Set<User> voter;
+//	private Set<SiteUser> voter;
 }
 
-// 

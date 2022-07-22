@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.mysite.used_market.DataNotFoundException;
 import com.mysite.used_market.item.Item;
-import com.mysite.used_market.user.User;
+import com.mysite.used_market.user.SiteUser;
 
 import lombok.RequiredArgsConstructor;
 
@@ -26,12 +26,12 @@ public class InquiryService {
 		}
 	}
 
-	public void createInquiry(Item item, String content, User username) {
+	public void createInquiry(Item item, String content, SiteUser author) {
 		Inquiry inquiry = new Inquiry();
 		inquiry.setContent(content);
 		inquiry.setCreateDate(LocalDateTime.now());
 		inquiry.setItem(item);
-		inquiry.setUsername(username);
+		inquiry.setAuthor(author);
 		this.inquiryRepository.save(inquiry);
 	}
 
@@ -45,10 +45,9 @@ public class InquiryService {
 		this.inquiryRepository.delete(inquiry);
 	}
 
-	public void vote(Inquiry inquiry, User user) {
-		inquiry.getVoter().add(user);
-		this.inquiryRepository.save(inquiry);
-	}
+//	public void vote(Inquiry inquiry, SiteUser user) {
+//		inquiry.getVoter().add(user);
+//		this.inquiryRepository.save(inquiry);
+//	}
 	
 }
-// 

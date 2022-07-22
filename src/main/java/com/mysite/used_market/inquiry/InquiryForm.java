@@ -12,4 +12,3 @@ public class InquiryForm {
 	@NotEmpty(message = "내용은 필수입니다. 내용을 입력하세요!")
 	private String content;
 }
-// 

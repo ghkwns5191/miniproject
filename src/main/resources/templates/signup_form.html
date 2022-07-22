@@ -9,28 +9,28 @@
        
         <div class="mb-3">
             <label for="username" class="form-label">사용자ID</label>
-            <input type="text" th:field="*{username}" class="form-control">
+            <input type="text" th:field="*{username}" class="form-control" placeholder="사용하실 ID를 입력하세요">
         </div>
         <div class="mb-3">
             <label for="password1" class="form-label">비밀번호</label>
-            <input type="password" th:field="*{password1}" class="form-control">
+            <input type="password" th:field="*{password1}" class="form-control" placeholder="사용하실 비밀번호를 입력하세요.">
         </div>
         <div class="mb-3">
             <label for="password2" class="form-label">비밀번호 확인</label>
-            <input type="password" th:field="*{password2}" class="form-control">
+            <input type="password" th:field="*{password2}" class="form-control" placeholder="동일한 비밀번호를 한번 더 입력하세요.">
         </div>
         <div class="mb-3">
             <label for="email" class="form-label">이메일</label>
-            <input type="email" th:field="*{email}" class="form-control">
+            <input type="email" th:field="*{email}" class="form-control" placeholder="이메일을 입력하세요.">
         </div>
         <div class="mb-3">
             <label for="phonenumber" class="form-label">전화번호</label>
-            <input type="tel" th:field="*{phonenumber}" class="form-control">
+            <input type="tel" th:field="*{phonenumber}" class="form-control" placeholder="전화번호를 입력하세요.">
         </div>
         
         <div class="mb-3">
             <label for="address" class="form-label">주소</label>
-            <input type="text" th:field="*{address}" class="form-control">
+            <input type="text" th:field="*{address}" class="form-control" placeholder="주소를 입력하세요.">
         </div>
         <button type="submit" class="btn btn-primary">회원가입</button>
     </form>

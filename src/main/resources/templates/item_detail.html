@@ -3,11 +3,14 @@
 
 
 <div layout:fragment="content" class="container my-3">
-<h2 class="border-bottom py-2" th:text = "${item.subject}"> </h2>
+<h2 class="border-bottom py-2 bg-light" th:text = "${item.subject}"> </h2>
 
 <div class="card my-3">
 <div class="card-body">
 <div class="card-text" style="white-space:pre-line;" th:text=${item.content}></div>
+
+<br><br><hr><div>판매희망가격<div>
+<div class="card-text" style="white-space:pre-line;" th:text=${item.price}></div>
 </div>
 <div>
 <div class="d-flex justify-content-end">
@@ -15,11 +18,30 @@
 <td th:text="${#temporals.format(item.createDate, 'yyyy-mm-dd HH:mm')}"></td>
 </div>
 </div>
+ 			<div class="my-3">
+ 
+            	 <a href="javascript:void(0);" class="recommend btn btn-sm btn-outline-secondary"
+                th:data-uri="@{|/item/positive/${item.id}|}">
+                판매자가 친절해요
+                <span class="badge rounded-pill bg-success" th:text="${#lists.size(item.voter)}"></span>
+            </a>
+            
+             
+            	<a th:href="@{|/item/modify/${item.id}|}" class="btn btn-sm btn-outline-secondary"
+           		   sec:authorize="isAuthenticated()"
+           		   th:if="${item.author != null and #authentication.getPrincipal().getUsername() == item.author.username}"
+           		   th:text="수정"></a>
+        		<a href="javascript:void(0);" th:data-uri="@{|/item/delete/${item.id}|}" 
+        		   class="delete btn btn-sm btn-outline-secondary"
+        		   sec:authorize="isAuthenticated()"
+        		   th:if="${item.author != null and #authentication.getPrincipal().getUsername() == item.author.username}"
+        		   th:text="삭제"></a>
+            </div>
 </div>
 </div>
 
 
-<div class="card my-3" th:each="answer: ${item.inquiryList}" >
+<div class="card my-3" th:each="inquiry: ${item.inquiryList}" >
       <div class="card-body">
            <div class="card-text" style="white-space: pre-line;"  th:text="${inquiry.content}"></div>
            <div class="d-flex justify-content-end">
@@ -35,18 +57,16 @@
            </div>
            
            <div class="my-3">
-           <a href="javascript:void(0);" class="recommend btn btn-sm btn-outline-secondary"
-                th:data-uri="@{|/inquiry/vote/${inquiry.id}|}">
-                추천
-                <span class="badge rounded-pill bg-success" th:text="${#lists.size(inquiry.voter)}"></span>
-            </a>
+           
+           
+             
             <a th:href="@{|/inquiry/modify/${inquiry.id}|}" class="btn btn-sm btn-outline-secondary"
                 sec:authorize="isAuthenticated()"
-                th:if="${inquiry.username != null and #authentication.getPrincipal().getUsername() == inquiry.username.username}"
+                th:if="${inquiry.author != null and #authentication.getPrincipal().getUsername() == inquiry.author.username}"
                 th:text="수정"></a>
             <a href="javascript:void(0);" th:data-uri="@{|/inquiry/delete/${inquiry.id}|}"
                 class="delete btn btn-sm btn-outline-secondary" sec:authorize="isAuthenticated()"
-                th:if="${inquiry.username != null and #authentication.getPrincipal().getUsername() == inquiry.username.username}"
+                th:if="${inquiry.author != null and #authentication.getPrincipal().getUsername() == inquiry.author.username}"
                 th:text="삭제"></a>
         </div>
        </div>

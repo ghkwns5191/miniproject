@@ -63,7 +63,7 @@ private final ItemRepository itemRepository;
 
 		public Page<Item> getList(int page, String kw) {
 			List<Sort.Order> sorts = new ArrayList<>();
-			sorts.add(Sort.Order.desc("createDate"));
+			sorts.add(Sort.Order.desc("id"));
 			Pageable pageable = PageRequest.of(page, 10, Sort.by(sorts));
 			Specification<Item> spec = search(kw);
 			return this.itemRepository.findAll(spec, pageable);
@@ -80,10 +80,10 @@ private final ItemRepository itemRepository;
 	        this.itemRepository.delete(item);
 	    }
 	   
-//	    public void vote(Item item, SiteUser siteUser) {
-//	        item.getVoter().add(siteUser);
-//	        this.itemRepository.save(item);
-//	    }
+	    public void vote(Item item, SiteUser siteUser) {
+	        item.getVoter().add(siteUser);
+	        this.itemRepository.save(item);
+	    }
 		    
 		    
 	    private Specification<Item> search(String kw) {

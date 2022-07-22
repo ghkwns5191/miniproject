@@ -5,6 +5,7 @@ import java.security.Principal;
 import javax.validation.Valid;
 
 import org.springframework.data.domain.Page;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,6 +15,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.server.ResponseStatusException;
+
 
 import com.mysite.used_market.inquiry.InquiryForm;
 import com.mysite.used_market.user.SiteUser;
@@ -71,12 +74,12 @@ public class ItemController {
         this.itemService.create(itemForm.getSubject(), itemForm.getContent(), itemForm.getPrice(), siteUser);
         return "redirect:/item/list";
     }
-    /*
+   
     @PreAuthorize("isAuthenticated()")
     @GetMapping("/modify/{id}")
     public String itemModify(ItemForm itemForm, @PathVariable("id") Integer id, Principal principal) {
         Item item = this.itemService.getItem(id);
-        if(!item.getUsername().equals(principal.getName())) {
+        if(!item.getAuthor().getUsername().equals(principal.getName())) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "수정권한이 없습니다.");
         }
         itemForm.setSubject(item.getSubject());
@@ -92,10 +95,10 @@ public class ItemController {
             return "item_form";
         }
         Item item = this.itemService.getItem(id);
-        if (!item.getUsername().equals(principal.getName())) {
+        if (!item.getAuthor().getUsername().equals(principal.getName())) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "수정권한이 없습니다.");
         }
-        this.itemService.modify(item, itemForm.getSubject(), itemForm.getContent());
+        this.itemService.modify(item, itemForm.getSubject(), itemForm.getContent(), item.getPrice());
         return String.format("redirect:/item/detail/%s", id);
     }
     
@@ -103,12 +106,30 @@ public class ItemController {
     @GetMapping("/delete/{id}")
     public String questionDelete(Principal principal, @PathVariable("id") Integer id) {
         Item item = this.itemService.getItem(id);
-        if (!item.getUsername().equals(principal.getName())) {
+        if (!item.getAuthor().getUsername().equals(principal.getName())) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "삭제권한이 없습니다.");
         }
         this.itemService.delete(item);
         return "redirect:/";
-    }*/
+    }
+    
+    @PreAuthorize("isAuthenticated()")
+    @GetMapping("/positive/{id}")
+    public String questionVoteP(Principal principal, @PathVariable("id") Integer id) {
+        Item item = this.itemService.getItem(id);
+        SiteUser siteUser = this.userService.getUser(principal.getName());
+        this.itemService.vote(item, siteUser);
+        return String.format("redirect:/item/detail/%s", item.getId());
+    }
+    
+    @PreAuthorize("isAuthenticated()")
+    @GetMapping("/negative/{id}")
+    public String questionVoteN(Principal principal, @PathVariable("id") Integer id) {
+        Item item = this.itemService.getItem(id);
+        SiteUser siteUser = this.userService.getUser(principal.getName());
+        this.itemService.vote(item, siteUser);
+        return String.format("redirect:/item/detail/%s", item.getId());
+    }
     
     
 }

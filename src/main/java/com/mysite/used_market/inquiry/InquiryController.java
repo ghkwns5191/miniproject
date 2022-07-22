@@ -53,18 +53,21 @@ public class InquiryController {
 			throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "modifying is not authorized");
 		}
 		inquiryForm.setContent(inquiry.getContent());
-		return "answer_form";
+		return "inquiry_form";
 	}
 
 	@PreAuthorize("isAuthenticated()")
 	@PostMapping("/modify/{id}")
 	public String modifyInquiry(@Valid InquiryForm inquiryForm, BindingResult bindingResult,
 			@PathVariable("id") Integer id, Principal principal) {
+		if(bindingResult.hasErrors()) {
+			return "inquiry_form";
+		}
 		Inquiry inquiry = this.inquiryService.getInquiry(id);
 		if (!inquiry.getAuthor().getUsername().equals(principal.getName())) {
 			throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "modifying is not authorized");
 		}
-		this.inquiryService.modifyInquiry(inquiry, inquiry.getContent());
+		this.inquiryService.modifyInquiry(inquiry, inquiryForm.getContent());
 		return String.format("redirect:/item/detail/%s", inquiry.getItem().getId());
 	}
 

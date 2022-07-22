@@ -45,9 +45,9 @@ public class InquiryService {
 		this.inquiryRepository.delete(inquiry);
 	}
 
-//	public void vote(Inquiry inquiry, SiteUser user) {
-//		inquiry.getVoter().add(user);
-//		this.inquiryRepository.save(inquiry);
-//	}
+	public void vote(Inquiry inquiry, SiteUser user) {
+		inquiry.getVoter().add(user);
+		this.inquiryRepository.save(inquiry);
+	}
 	
 }
